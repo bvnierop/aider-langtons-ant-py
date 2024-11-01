@@ -36,7 +36,7 @@ class TestSimulation(unittest.TestCase):
 
     def test_simulate_step_with_invalid_cell_color_raises_value_error(self):
         grid = Grid()
-        grid.set_cell_color((0, 0), 'blue')  # invalid color
+        grid._cells[(0, 0)] = 'blue'  # Set invalid color directly for testing
         ant = Ant(position=(0, 0), direction='up')
         with self.assertRaises(ValueError):
             simulate_step(ant, grid)
