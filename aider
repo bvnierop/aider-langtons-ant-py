@@ -1,0 +1,7 @@
+#!/bin/bash
+CLAUDE="op://Api Keys/Anthropic API Key/credential"
+OPENAI="op://Api Keys/OpenAI Platform/credential"
+aider --dark-mode --anthropic-api-key $(op read "$CLAUDE") --openai-api-key $(op read "$OPENAI") \
+  --editor-model o1-preview \
+  --model anthropic/claude-3-5-sonnet-20241022 \
+  --architect
