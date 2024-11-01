@@ -1,21 +1,23 @@
 import unittest
 from src.grid import Grid
+from typing import Tuple
 
 class TestGrid(unittest.TestCase):
     def setUp(self):
         self.grid = Grid()
 
-    def test_get_cell_color_default(self):
-        self.assertEqual(self.grid.get_cell_color((0, 0)), 'white')
+    def test_get_cell_color_default_white(self):
+        pos: Tuple[int, int] = (5, 5)
+        self.assertEqual(self.grid.get_cell_color(pos), 'white')
 
     def test_set_and_get_cell_color(self):
-        self.grid.set_cell_color((1, 1), 'dark')
-        self.assertEqual(self.grid.get_cell_color((1, 1)), 'dark')
+        pos: Tuple[int, int] = (1, 2)
+        self.grid.set_cell_color(pos, 'dark')
+        self.assertEqual(self.grid.get_cell_color(pos), 'dark')
+        self.grid.set_cell_color(pos, 'white')
+        self.assertEqual(self.grid.get_cell_color(pos), 'white')
 
-    def test_set_cell_color_overwrite(self):
-        self.grid.set_cell_color((2, 2), 'dark')
-        self.grid.set_cell_color((2, 2), 'white')
-        self.assertEqual(self.grid.get_cell_color((2, 2)), 'white')
-
-if __name__ == '__main__':
-    unittest.main()
+    def test_set_invalid_color(self):
+        pos: Tuple[int, int] = (0, 0)
+        with self.assertRaises(ValueError):
+            self.grid.set_cell_color(pos, 'blue')

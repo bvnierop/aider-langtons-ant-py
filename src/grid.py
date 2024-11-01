@@ -1,11 +1,13 @@
-from typing import Tuple, Dict
+from typing import Dict, Tuple
 
 class Grid:
     def __init__(self) -> None:
-        self.cells: Dict[Tuple[int, int], str] = {}
+        self._cells: Dict[Tuple[int, int], str] = {}
 
     def get_cell_color(self, position: Tuple[int, int]) -> str:
-        return self.cells.get(position, 'white')
+        return self._cells.get(position, 'white')
 
     def set_cell_color(self, position: Tuple[int, int], color: str) -> None:
-        self.cells[position] = color
+        if color not in ['white', 'dark']:
+            raise ValueError(f"Invalid color: {color}")
+        self._cells[position] = color
