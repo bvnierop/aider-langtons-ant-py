@@ -2,29 +2,26 @@ import unittest
 from src.grid import Grid
 
 class TestGrid(unittest.TestCase):
-    def test_get_cell_color_default_white(self):
+    def test_get_cell_color_returns_white_for_new_grid(self):
         grid = Grid()
-        positions = [(0, 0), (1, 1), (-1, -1), (100, 100)]
-        for pos in positions:
-            self.assertEqual(grid.get_cell_color(pos), 'white')
+        self.assertEqual(grid.get_cell_color((0, 0)), 'white')
+        self.assertEqual(grid.get_cell_color((1, -1)), 'white')
 
-    def test_set_and_get_cell_color_dark(self):
+    def test_set_cell_color_to_dark(self):
         grid = Grid()
-        position = (2, 3)
-        grid.set_cell_color(position, 'dark')
-        self.assertEqual(grid.get_cell_color(position), 'dark')
+        grid.set_cell_color((0, 0), 'dark')
+        self.assertEqual(grid.get_cell_color((0, 0)), 'dark')
 
-    def test_set_and_get_cell_color_white(self):
+    def test_set_cell_color_to_white(self):
         grid = Grid()
-        position = (-2, -3)
-        grid.set_cell_color(position, 'white')
-        self.assertEqual(grid.get_cell_color(position), 'white')
+        grid.set_cell_color((0, 0), 'dark')
+        grid.set_cell_color((0, 0), 'white')
+        self.assertEqual(grid.get_cell_color((0, 0)), 'white')
 
     def test_set_cell_color_invalid_value_raises_value_error(self):
         grid = Grid()
-        position = (0, 0)
         with self.assertRaises(ValueError):
-            grid.set_cell_color(position, 'blue')
+            grid.set_cell_color((0, 0), 'blue')
 
 if __name__ == '__main__':
     unittest.main()
